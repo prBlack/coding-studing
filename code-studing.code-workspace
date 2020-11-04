@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\..\\vcpkg\\installed\\x86-windows\\include"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp",
+			"cmath": "cpp"
+		}
+	}
+}
