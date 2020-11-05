@@ -10,14 +10,14 @@ void DrawDice(int Cost);
 int UserTurn(int arr[4][4], int step)
 {
     arr[USER][step] = roll_dice() + roll_dice();
-    cout << "User choice is :" << arr[USER][step] << endl;
+    cout << "User scories is :" << arr[USER][step] << endl;
     return arr[USER][step];
 }
 
 int CompTurn(int arr[2][4], int step)
 {
     arr[COMP][step] = roll_dice() + roll_dice();
-    cout << "Comp choice is :" << arr[COMP][step] << endl;
+    cout << "Comp scories is :" << arr[COMP][step] << endl;
     return arr[COMP][step];
 }
 
@@ -39,6 +39,8 @@ int main()
             CompResult += CompTurn(Res, i);
             UserResult += UserTurn(Res, i);
         }
+        cout << "Total scories over " << i << " rounds is " << UserResult << " for User vs " 
+        << CompResult << " for Comp " << endl;
         cout << "Press key for next step: "; cin >> mystr;
         i++;
     }
@@ -63,50 +65,50 @@ void DrawDice(int Cost)
     {
     case /* constant-expression */1:
         /* code */
-        cout << "---------" << endl;
-        cout << "|       |" << endl;
-        cout << "|   *   |" << endl;
-        cout << "|_______|" << endl;
+        cout << "\t---------" << endl;
+        cout << "\t|       |" << endl;
+        cout << "\t|   *   |" << endl;
+        cout << "\t|_______|" << endl;
         cout << endl;
         break;
     case /* constant-expression */2:
         /* code */
-        cout << "---------" << endl;
-        cout << "|     * |" << endl;
-        cout << "|       |" << endl;
-        cout << "|_*_____|" << endl;
+        cout << "\t---------" << endl;
+        cout << "\t|     * |" << endl;
+        cout << "\t|       |" << endl;
+        cout << "\t|_*_____|" << endl;
         cout << endl;        
         break;
     case /* constant-expression */3:
         /* code */
-        cout << "---------" << endl;
-        cout << "|     * |" << endl;
-        cout << "|   *   |" << endl;
-        cout << "|_*_____|" << endl;
+        cout << "\t---------" << endl;
+        cout << "\t|     * |" << endl;
+        cout << "\t|   *   |" << endl;
+        cout << "\t|_*_____|" << endl;
         cout << endl;
         break;   
     case /* constant-expression */4:
         /* code */
-        cout << "---------" << endl;
-        cout << "| *   * |" << endl;
-        cout << "|       |" << endl;
-        cout << "|_*___*_|" << endl;
+        cout << "\t---------" << endl;
+        cout << "\t| *   * |" << endl;
+        cout << "\t|       |" << endl;
+        cout << "\t|_*___*_|" << endl;
         cout << endl;
         break;
     case /* constant-expression */5:
         /* code */
-        cout << "---------" << endl;
-        cout << "| *   * |" << endl;
-        cout << "|   *   |" << endl;
-        cout << "|_*___*_|" << endl;
+        cout << "\t---------" << endl;
+        cout << "\t| *   * |" << endl;
+        cout << "\t|   *   |" << endl;
+        cout << "\t|_*___*_|" << endl;
         cout << endl;    
         break;
     case /* constant-expression */6:
         /* code */
-        cout << "---------" << endl;
-        cout << "| *   * |" << endl;
-        cout << "| *   * |" << endl;
-        cout << "|_*___*_|" << endl;
+        cout << "\t---------" << endl;
+        cout << "\t| *   * |" << endl;
+        cout << "\t| *   * |" << endl;
+        cout << "\t|_*___*_|" << endl;
         cout << endl;
         break;
     default:
