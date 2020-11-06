@@ -7,35 +7,34 @@ const int ColCount = 5;
 int main()
 {
     int Arr_2d[RowCount][ColCount];
-    int summ_i[RowCount] = {0}; 
     int summ_j[ColCount] = {0};
+    int j = 0;
     for (int i =0; i< RowCount; i++)
     {
         cout << "Enter row in 5 numbers: " << endl;
-        for (int j=0; j< ColCount; j++)
+        for (j=0; j< ColCount; j++)
         {
             cin >> Arr_2d[i][j];
             summ_j[j] +=Arr_2d[i][j];
         }
-        summ_i[i] += Arr_2d[i][j];
     } 
 
-    for(int j = 0;i<RowCount;i++)
-    {
-        for (int j = 0; j<ColCount;j++)
-        {
-            cout << "\t" << Arr_2d[i][j]; 
-        }
-        cout << endl;
-    }
-
+    int summ_ii =0;
     for(int i = 0;i<RowCount;i++)
     {
         for (int j = 0; j<ColCount;j++)
         {
-            cout << "\t" << Arr_2d[i][j]; 
+            cout << "\t" << Arr_2d[i][j];
+            summ_ii += Arr_2d[i][j]; 
         }
-        cout << endl;
+        cout << '\t' << "sum " << summ_ii << endl;
+        summ_ii = 0;
     }
+
+    for (int j = 0; j<ColCount;j++)
+    {
+          cout << "\t" << summ_j[j];
+    }
+    cout << endl;
     return 0;
 }
