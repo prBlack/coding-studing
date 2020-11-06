@@ -11,7 +11,7 @@ int main()
     int j = 0;
     for (int i =0; i< RowCount; i++)
     {
-        cout << "Enter row in 5 numbers: " << endl;
+        cout << "Enter row consist 5 numbers: " << endl;
         for (j=0; j< ColCount; j++)
         {
             cin >> Arr_2d[i][j];
