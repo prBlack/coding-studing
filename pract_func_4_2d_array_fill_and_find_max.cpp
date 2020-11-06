@@ -18,7 +18,7 @@ void FillMatrix(int arr[][SizeMatrix], int size_x)
     cout << endl;
 }
 
-void CalculateSumm(int arr[][SizeMatrix], int size_x, int sum[SizeMatrix])
+void CalculateSummColomn(int arr[][SizeMatrix], int size_x, int sum[SizeMatrix])
 {
     for (int i =0; i<size_x;i++)
     {
@@ -29,22 +29,37 @@ void CalculateSumm(int arr[][SizeMatrix], int size_x, int sum[SizeMatrix])
     cout << endl;
 }
 
+void CalculateSummRow(int arr[][SizeMatrix], int size_x, int sum[SizeMatrix])
+{
+    for (int i =0; i<size_x;i++)
+    {
+        for (int j =0; j<size_x; j++)
+            sum[i] += arr[i][j];
+        cout << '\t' << sum[i];
+    }
+    cout << endl;
+}
+
 int main()
 {
+    rand();rand();rand();
     int Matrix[SizeMatrix][SizeMatrix];
     int summ_i[SizeMatrix] = {0};
     int summ_j[SizeMatrix] = {0};
     int j = 0;
     FillMatrix(Matrix, SizeMatrix);
-    CalculateSumm(Matrix, SizeMatrix, summ_j);
+    CalculateSummColomn(Matrix, SizeMatrix, summ_j);
     
     int max = summ_j[0];
-    
+    int Row = 0;
     for (int i = 0; i<SizeMatrix;i++)
     {
         if (max < summ_j[i])
+        {
             max = summ_j[i];
+            Row = i;
+        }
     }
-    cout << endl << "Maximum is " << max << endl;
+    cout << endl << "Maximum is " << max << " in " << Row+1 << " colomn " << endl;
     return 0;
 }
