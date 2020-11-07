@@ -4,12 +4,13 @@
 using namespace std;
  
 void changeData(int *varForCh1, int *varForCh2);
- 
+
+
+/* main function */
 int main()
 {
 
     setlocale(LC_ALL, "rus");
-    
     int variableForChange_1 = 0;
     int variableForChange_2 = 0;
     
