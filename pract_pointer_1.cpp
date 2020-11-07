@@ -1,65 +1,35 @@
 #include <iostream>
+#include <clocale>
+
 using namespace std;
-
-const int SizeMatrix = 10;
-const int ColCount = 10;
-
-void FillMatrix(int arr[][SizeMatrix], int size_x)
-{
-    for (int i =0; i< size_x; i++)
-    {
-        for (int j=0; j< size_x; j++)
-        {
-            arr[i][j] = 10 + rand()%90;
-            cout << '\t' << arr[i][j];
-        }
-        cout << endl;
-    }
-    cout << endl;
-}
-
-void CalculateSummColomn(int arr[][SizeMatrix], int size_x, int sum[SizeMatrix])
-{
-    for (int i =0; i<size_x;i++)
-    {
-        for (int j =0; j<size_x; j++)
-            sum[i] += arr[j][i];
-        cout << '\t' << sum[i];
-    }
-    cout << endl;
-}
-
-void CalculateSummRow(int arr[][SizeMatrix], int size_x, int sum[SizeMatrix])
-{
-    for (int i =0; i<size_x;i++)
-    {
-        for (int j =0; j<size_x; j++)
-            sum[i] += arr[i][j];
-        cout << '\t' << sum[i];
-    }
-    cout << endl;
-}
-
+ 
+void changeData(int *varForCh1, int *varForCh2);
+ 
 int main()
 {
-    rand();rand();rand();
-    int Matrix[SizeMatrix][SizeMatrix];
-    int summ_i[SizeMatrix] = {0};
-    int summ_j[SizeMatrix] = {0};
-    int j = 0;
-    FillMatrix(Matrix, SizeMatrix);
-    CalculateSummColomn(Matrix, SizeMatrix, summ_j);
+
+    setlocale(LC_ALL, "rus");
     
-    int max = summ_j[0];
-    int Row = 0;
-    for (int i = 0; i<SizeMatrix;i++)
-    {
-        if (max < summ_j[i])
-        {
-            max = summ_j[i];
-            Row = i;
-        }
-    }
-    cout << endl << "Maximum is " << max << " in " << Row+1 << " colomn " << endl;
+    int variableForChange_1 = 0;
+    int variableForChange_2 = 0;
+    
+    cout << "variableForChange_1 = " << variableForChange_1 << endl;
+    cout << "variableForChange_2 = " << variableForChange_2 << endl;
+    cout << endl;
+    
+    changeData(&variableForChange_1, &variableForChange_2);
+    
+    cout << endl;
+    cout << "variableForChange_1 = " << variableForChange_1 << endl;
+    cout << "variableForChange_2 = " << variableForChange_2 << endl;
+    
     return 0;
+}
+ 
+void changeData(int *varForCh1, int *varForCh2)
+{
+    cout << "Enter new value 1: ";
+    cin >> *varForCh1;
+    cout << "Enter new value 2: ";
+    cin >> *varForCh2;
 }
