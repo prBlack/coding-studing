@@ -4,11 +4,14 @@ using namespace std;
 
 int main()
 {
-    int p = 2;
-    int* p1 = &p;
-    int ** p2 = &p1;
-    cout << "Value in p is: " << (int)(**p) << endl;
-    delete p2;
-    delete p1; 
+    int*** p;
+    //int** p;
+    //int** p = new int* = new int = 2;
+    //*( *(p = new int*) = new int) = 2; // Double pointer
+    *( *( *(p = new int**) = new int*) = new int) = 2; //triple pointer
+    cout << "Value in p is: " << (int)(***p) << endl;
+    delete **p;
+    delete *p;
+    delete p;
     return 0;
 }
