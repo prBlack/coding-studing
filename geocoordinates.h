@@ -1,5 +1,6 @@
 #include <iostream>
 
+const float EarthRadius = 6371;
 // define class for operating geographic coordinates
 class geocoord
 {
@@ -57,12 +58,13 @@ geocoord::geocoord()
 
 void geocoord::set(float latitude, float longtitude)
 {
+
+    if (latitude < 0 ) {this->northen = false; latitude *=-1;}
     this->latitude_degr = static_cast <int> (latitude);
     this->latitude_decimal = latitude - static_cast <float> (this->latitude_degr);
-    if (latitude < 0 ) this->northen = false;
+    if (longtitude < 0) {this->eastern = false; longtitude *=-1;}
     this->longtitude_degr = static_cast <int> (longtitude);
     this->longtitude_decimal = longtitude -  static_cast <float> (this->longtitude_degr);
-    if (longtitude < 0) this->eastern = false;
 }
 
 void geocoord::get(float& latitude, float& longtitude)
@@ -83,10 +85,10 @@ class chainXY : public geocoord
 {
 private:
 protected:
-    geocoord* nextXY;
+    chainXY* nextXY;
     float DistanceToNext;
 public:
-    bool setnext(geocoord* next)
+    bool setnext(chainXY* next)
     {
         nextXY = next;
     }
@@ -103,12 +105,16 @@ public:
 
     float GetLatFloat()
     {
-        return static_cast <float> (latitude_degr) + latitude_decimal;
+        float Lat = static_cast <float> (latitude_degr) + latitude_decimal;
+        if(!this->northen) Lat = Lat*-1;
+        return Lat;
     }
 
     float GetLongFloat()
     {
-        return static_cast <float> (longtitude_degr) + longtitude_decimal;
+        float Long =  static_cast <float> (longtitude_degr) + longtitude_decimal;
+        if(!this->eastern) Long = Long*-1;
+        return Long;
     }
 
     chainXY(){
@@ -128,13 +134,15 @@ public:
         altutude = next.altutude;
         DistanceToNext = calculateDistance(next);
     }
+    chainXY* next(){return nextXY;}
 
 };
 
 float chainXY::calculateDistance(chainXY& next)
 {
-    float temp = sin(this->GetLatFloat())*sin((&next)->GetLatFloat()) + cos(this->GetLatFloat())*cos((&next)->GetLatFloat())*cos(this->GetLongFloat()-(&next)->GetLongFloat());
-    return temp * 6371.0;
+    float temp = acos(sin(this->GetLatFloat())*sin((&next)->GetLatFloat()) + cos(this->GetLatFloat())*cos((&next)->GetLatFloat())*cos(this->GetLongFloat()-(&next)->GetLongFloat()));
+    //std::cout << "cos(d) = " << temp << '\t';
+    return temp * EarthRadius;
 }
 
 void chainXY::SetDistance(chainXY& next)
