@@ -4,6 +4,8 @@
 class geocoord
 {
 private:
+
+protected:
     int latitude_degr;
     float latitude_decimal;
     bool northen;
@@ -75,4 +77,67 @@ std::ostream& operator<<(std::ostream& out, const geocoord &coordinates)
     if (coordinates.northen) out << "N, "; else out << "S, ";
     out << (coordinates.longtitude_degr + coordinates.longtitude_decimal);
     if (coordinates.eastern) out << "E"; else out << "W"; 
+}
+
+class chainXY : public geocoord
+{
+private:
+protected:
+    geocoord* nextXY;
+    float DistanceToNext;
+public:
+    bool setnext(geocoord* next)
+    {
+        nextXY = next;
+    }
+    //method for calculate distance for next cain element;
+
+    void BinSort(chainXY& arrXY);
+
+    float calculateDistance(chainXY& next);
+    void SetDistance(chainXY& next);
+    float GetDistanceToNext()
+    {
+        return chainXY::DistanceToNext;
+    }
+
+    float GetLatFloat()
+    {
+        return static_cast <float> (latitude_degr) + latitude_decimal;
+    }
+
+    float GetLongFloat()
+    {
+        return static_cast <float> (longtitude_degr) + longtitude_decimal;
+    }
+
+    chainXY(){
+        this->nextXY = NULL;
+        this->DistanceToNext = 0.0;
+    }
+    ~chainXY();
+
+    chainXY& operator= (chainXY& next)
+    {
+        latitude_degr = next.latitude_degr;
+        latitude_decimal = next.latitude_decimal;
+        northen = next.northen;
+        longtitude_degr = next.longtitude_degr;
+        longtitude_decimal = next.longtitude_decimal;
+        eastern = next.eastern;
+        altutude = next.altutude;
+        DistanceToNext = calculateDistance(next);
+    }
+
+};
+
+float chainXY::calculateDistance(chainXY& next)
+{
+    float temp = sin(this->GetLatFloat())*sin((&next)->GetLatFloat()) + cos(this->GetLatFloat())*cos((&next)->GetLatFloat())*cos(this->GetLongFloat()-(&next)->GetLongFloat());
+    return temp * 6371.0;
+}
+
+void chainXY::SetDistance(chainXY& next)
+{
+    this->DistanceToNext = this->calculateDistance(next);
 }
