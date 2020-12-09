@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include <cstdlib>
 using namespace std;
 
 struct Size
@@ -71,17 +72,16 @@ void fillData(WonderfulWoman &Obj)
     string delimiter = "/";
     int pos_start =0, pos_end, delim_len = delimiter.length();
 
-    cout << "Volumes? br/wa/hip :"; cin >> VolText;
-    while ((pos_end = VolText.find(delimiter, pos_start)) != string::npos)
-    {
-        token = VolText.substr(pos_start, pos_end - pos_start);
-        pos_start = pos_end + delim_len;
-        volumes.push_back(token);
-    }
-
-    Obj.volume.breast = volumes[0]; 
-    Obj.volume.waist = volumes[1];
-    Obj.volume.hips = volumes[2];
+    cout << "Введите объемы (грудь, талия, бедра): ";
+    setSizes(Volume);
     cout << "Set English (1 - yes, 0 - no): "; cin >> Obj.engKnolidge;
+    cout << endl;
+}
+
+void setSizes(Size* Obj)
+{
+    cin >> Obj->breast;
+    cin >> Obj->waist;
+    cin >> Obj->hips;
     cout << endl;
 }
