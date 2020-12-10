@@ -10,6 +10,7 @@ int main()
     chainXY* MyGeo1 = new chainXY;
     MyGeo1->set(64.28, 100.22);
     chainXY* MyGeo2 = new chainXY;
+    double d;
     MyGeo2->set(40.71, -74.01);
     MyGeo1->setnext(MyGeo2);
     MyGeo1->SetDistance(*MyGeo1->next());

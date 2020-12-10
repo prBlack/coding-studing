@@ -1,6 +1,6 @@
 #include <iostream>
 
-const float EarthRadius = 6371;
+const double EarthRadius = 6371.0;
 // define class for operating geographic coordinates
 class geocoord
 {
@@ -19,6 +19,7 @@ public:
     void set(float latitude, float longtitude);
     // get coordinates method for object geocoord class
     void get(float& latitude, float& longtitude);
+
     // constructor method
     geocoord();
     //destructor method
@@ -58,7 +59,6 @@ geocoord::geocoord()
 
 void geocoord::set(float latitude, float longtitude)
 {
-
     if (latitude < 0 ) {this->northen = false; latitude *=-1;}
     this->latitude_degr = static_cast <int> (latitude);
     this->latitude_decimal = latitude - static_cast <float> (this->latitude_degr);
@@ -110,11 +110,25 @@ public:
         return Lat;
     }
 
+    float GetLatRadian()
+    {
+        float Lat = static_cast <float> (latitude_degr) + latitude_decimal;
+        if(!this->northen) Lat = Lat*-1;
+        return Lat*3.14/180;
+    }
+
     float GetLongFloat()
     {
         float Long =  static_cast <float> (longtitude_degr) + longtitude_decimal;
         if(!this->eastern) Long = Long*-1;
         return Long;
+    }
+ 
+    float GetLongRadian()
+    {
+        float Long =  static_cast <float> (longtitude_degr) + longtitude_decimal;
+        if(!this->eastern) Long = Long*-1;
+        return Long*3.14/180;
     }
 
     chainXY(){
@@ -140,8 +154,10 @@ public:
 
 float chainXY::calculateDistance(chainXY& next)
 {
-    float temp = acos(sin(this->GetLatFloat())*sin((&next)->GetLatFloat()) + cos(this->GetLatFloat())*cos((&next)->GetLatFloat())*cos(this->GetLongFloat()-(&next)->GetLongFloat()));
-    //std::cout << "cos(d) = " << temp << '\t';
+    float temp =  sin(this->GetLatRadian())*sin((&next)->GetLatRadian()) \
+                    + cos(this->GetLatRadian())*cos((&next)->GetLatRadian()) \
+                    *cos(this->GetLongRadian()-(&next)->GetLongRadian());
+    temp = acos(temp);
     return temp * EarthRadius;
 }
 
